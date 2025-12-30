@@ -1,23 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
-use App\Livewire\RegisterUser;
-use App\Livewire\LoginUser;
-use App\Livewire\SplashPage;
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', SplashPage::class)->name('splash');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/register', RegisterUser::class)->name('register');
-Route::get('/login', LoginUser::class)->name('login');
-
-
-Route::post('/logout', function () {
-	Auth::logout();
-	request()->session()->invalidate();
-	request()->session()->regenerateToken();
-	return redirect('/');
-})->name('logout');
-
+require __DIR__.'/auth.php';
