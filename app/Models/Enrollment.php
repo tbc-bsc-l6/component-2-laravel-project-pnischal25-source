@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Enrollment extends Model
 {
     protected $fillable = [
         'user_id',
         'module_id',
-        'enrolled_at',
         'status',
+        'enrolled_at',
         'completed_at',
     ];
 
@@ -19,26 +20,13 @@ class Enrollment extends Model
         'completed_at' => 'datetime',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function module()
+    public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class);
     }
-
-    // Check if enrollment is active
-    public function isActive()
-    {
-        return $this->status === 'enrolled';
-    }
-
-    // Check if completed
-    public function isCompleted()
-    {
-        return in_array($this->status, ['pass', 'fail']);
-    }
-
 }

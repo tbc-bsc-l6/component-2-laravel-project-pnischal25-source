@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserRole::class);
     }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function teacherModules()
+    {
+        return $this->belongsToMany(Module::class, 'teacher_modules', 'user_id', 'module_id');
+    }
 }
