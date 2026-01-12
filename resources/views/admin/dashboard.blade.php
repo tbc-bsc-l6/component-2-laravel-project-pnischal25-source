@@ -5,6 +5,17 @@
         </h2>
     </x-slot>
 
+    <style>
+        /* Make text selection highly visible in tables */
+        table td::selection,
+        table th::selection,
+        table td *::selection,
+        table th *::selection {
+            background-color: #1e40af !important; /* Blue-800 */
+            color: white !important;
+        }
+    </style>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
@@ -96,29 +107,30 @@
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Manage Teachers</h3>
                             <!-- Add Teacher Modal Trigger -->
-                            <button onclick="document.getElementById('addTeacherModal').showModal()" class="bg-purple-600 border border-purple-400 hover:bg-purple-500 hover:border-purple-300 text-white px-4 py-2 rounded-lg shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all duration-300 hover:-translate-y-0.5">
+                            <button onclick="document.getElementById('addTeacherModal').showModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200">
                                 + Add Teacher
                             </button>
                         </div>
-                        <div class="overflow-x-auto border rounded-xl">
-                            <table class="w-full text-left text-gray-600">
-                                <thead class="bg-gradient-to-r from-purple-600 to-indigo-600 uppercase text-xs text-white border-b border-indigo-700">
+                        <div class="overflow-x-auto border-2 border-gray-100 rounded-xl">
+                            <table class="w-full text-left">
+                                <thead class="bg-gradient-to-r from-teal-500 to-cyan-500 uppercase text-xs text-black">
                                     <tr>
-                                        <th class="px-6 py-3 font-semibold">Name</th>
-                                        <th class="px-6 py-3 font-semibold">Email</th>
-                                        <th class="px-6 py-3 font-semibold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Name</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Email</th>
+                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-100">
-                                    @foreach($teachers as $teacher)
-                                    <tr class="hover:bg-gray-50 transition-colors">
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach($teachers as $index => $teacher)
+                                    @php $isEvenRow = $index % 2 === 0; @endphp
+                                    <tr class="hover:bg-purple-200/70 transition-colors {{ $isEvenRow ? 'bg-purple-100' : 'bg-purple-50' }}">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $teacher->name }}</td>
-                                        <td class="px-6 py-4">{{ $teacher->email }}</td>
-                                        <td class="px-6 py-4 text-right">
+                                        <td class="px-6 py-4 text-gray-800">{{ $teacher->email }}</td>
+                                        <td class="px-6 py-4 text-right text-gray-800">
                                             <form action="{{ route('admin.users.destroy', $teacher) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="text-red-500 hover:text-red-700 font-medium ml-2">Remove</button>
+                                                <button class="text-red-600 hover:text-red-800 font-semibold">Remove</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -134,27 +146,28 @@
                     <!-- Students Tab -->
                     <div x-show="activeTab === 'students'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Manage Students</h3>
-                        <div class="overflow-x-auto border rounded-xl">
-                            <table class="w-full text-left text-gray-600">
-                                <thead class="bg-gradient-to-r from-blue-600 to-cyan-600 uppercase text-xs text-white border-b border-blue-700">
+                        <div class="overflow-x-auto border-2 border-gray-100 rounded-xl">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-900 uppercase text-xs text-black">
                                     <tr>
-                                        <th class="px-6 py-3 font-semibold">Name</th>
-                                        <th class="px-6 py-3 font-semibold">Email</th>
-                                        <th class="px-6 py-3 font-semibold">Role</th>
-                                        <th class="px-6 py-3 font-semibold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Name</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Email</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Role</th>
+                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-100">
-                                    @foreach($students as $student)
-                                    <tr class="hover:bg-gray-50 transition-colors">
+                                <tbody class="divide-y divide-gray-200 bg-black">
+                                    @foreach($students as $index => $student)
+                                    @php $isEvenRow = $index % 2 === 0; @endphp
+                                    <tr class="hover:bg-blue-200/70 transition-colors {{ $isEvenRow ? 'bg-blue-100' : 'bg-blue-50' }}">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $student->name }}</td>
-                                        <td class="px-6 py-4">{{ $student->email }}</td>
-                                        <td class="px-6 py-4">
-                                            <span class="px-2 py-1 rounded text-xs font-semibold {{ $student->userRole->role === 'Student' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700' }}">
+                                        <td class="px-6 py-4 text-gray-800">{{ $student->email }}</td>
+                                        <td class="px-6 py-4 text-gray-800">
+                                            <span class="px-2 py-1 rounded text-xs font-semibold {{ $student->userRole->role === 'Student' ? 'bg-blue-200 text-blue-900' : 'bg-gray-200 text-gray-900' }}">
                                                 {{ $student->userRole->role }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-right">
+                                        <td class="px-6 py-4 text-right text-gray-800">
                                             <form action="{{ route('admin.users.updateRole', $student) }}" method="POST" class="inline-block mr-2">
                                                 @csrf
                                                 @method('PATCH')
@@ -171,7 +184,7 @@
                                             <form action="{{ route('admin.users.destroy', $student) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="text-red-500 hover:text-red-700 font-medium">Remove</button>
+                                                <button class="text-red-600 hover:text-red-800 font-semibold">Remove</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -188,39 +201,49 @@
                     <div x-show="activeTab === 'modules'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Manage Modules</h3>
-                            <button onclick="document.getElementById('addModuleModal').showModal()" class="bg-orange-600 border border-orange-400 hover:bg-orange-500 hover:border-orange-300 text-white px-4 py-2 rounded-lg shadow-[0_0_10px_rgba(234,88,12,0.4)] transition-all duration-300 hover:-translate-y-0.5">
+                            <button onclick="document.getElementById('addModuleModal').showModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200">
                                 + Add Module
                             </button>
                         </div>
-                        <div class="overflow-x-auto border rounded-xl">
-                            <table class="w-full text-left text-gray-600">
-                                <thead class="bg-gradient-to-r from-orange-500 to-pink-600 uppercase text-xs text-white border-b border-orange-700">
+                        <div class="overflow-x-auto border-2 border-gray-100 rounded-xl">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-900 uppercase text-xs text-black">
                                     <tr>
-                                        <th class="px-6 py-3 font-semibold">Module Name</th>
-                                        <th class="px-6 py-3 font-semibold">Status</th>
-                                        <th class="px-6 py-3 font-semibold">Teachers</th>
-                                        <th class="px-6 py-3 font-semibold">Enrollments</th>
-                                        <th class="px-6 py-3 font-semibold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Module Name</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Status</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Teachers</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Enrollments</th>
+                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-100">
-                                    @foreach($modules as $module)
-                                    <tr class="hover:bg-gray-50 transition-colors">
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach($modules as $index => $module)
+                                    @php $isEvenRow = $index % 2 === 0; @endphp
+                                    <tr class="hover:bg-orange-200/70 transition-colors {{ $isEvenRow ? 'bg-orange-100' : 'bg-orange-50' }}">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $module->module }}</td>
-                                        <td class="px-6 py-4">
-                                            <span class="px-2 py-1 rounded text-xs font-semibold {{ $module->is_available ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                        <td class="px-6 py-4 text-gray-800">
+                                            <span class="px-2 py-1 rounded text-xs font-semibold {{ $module->is_available ? 'bg-green-200 text-green-900' : 'bg-red-200 text-red-900' }}">
                                                 {{ $module->is_available ? 'Available' : 'Unavailable' }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-xs">
+                                        <td class="px-6 py-4 text-xs text-gray-800">
                                             @forelse($module->teachers as $teacher)
-                                                <span class="block">{{ $teacher->name }}</span>
+                                                <div class="flex items-center justify-between py-1">
+                                                    <span class="block">{{ $teacher->name }}</span>
+                                                    <form action="{{ route('admin.modules.unassignTeacher') }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('Unassign this teacher from the module?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="module_id" value="{{ $module->id }}">
+                                                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                                                        <button class="text-red-600 hover:text-red-800 text-sm font-bold hover:bg-red-50 px-1 rounded">✕</button>
+                                                    </form>
+                                                </div>
                                             @empty
                                                 <span class="text-gray-400 italic">No teacher</span>
                                             @endforelse
                                         </td>
-                                        <td class="px-6 py-4">{{ $module->enrollments->count() }}/10</td>
-                                        <td class="px-6 py-4 text-right space-x-2">
+                                        <td class="px-6 py-4 text-gray-800">{{ $module->enrollments->count() }}/10</td>
+                                        <td class="px-6 py-4 text-right space-x-2 text-gray-800">
                                             <!-- Toggle Availability -->
                                             <form action="{{ route('admin.modules.toggle', $module) }}" method="POST" class="inline-block">
                                                 @csrf
@@ -231,7 +254,7 @@
                                             </form>
                                             
                                             <!-- Assign Teacher -->
-                                            <button onclick="openAssignTeacherModal({{ $module->id }})" class="text-sm text-blue-600 hover:text-blue-800 underline font-medium">
+                                            <button onclick="openAssignTeacherModal({{ $module->id }})" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 px-3 py-1 rounded-lg font-medium transition-colors">
                                                 Assign Teacher
                                             </button>
                                         </td>
@@ -274,8 +297,8 @@
                     </div>
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
-                    <button type="button" onclick="document.getElementById('addTeacherModal').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Create</button>
+                    <button type="button" onclick="document.getElementById('addTeacherModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-lg font-semibold shadow-lg shadow-purple-500/50 transition-all">Create</button>
                 </div>
             </form>
         </div>
@@ -294,8 +317,8 @@
                     </div>
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
-                    <button type="button" onclick="document.getElementById('addModuleModal').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">Create</button>
+                    <button type="button" onclick="document.getElementById('addModuleModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white rounded-lg font-semibold shadow-lg shadow-orange-500/50 transition-all">Create</button>
                 </div>
             </form>
         </div>
@@ -319,8 +342,8 @@
                     </div>
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
-                    <button type="button" onclick="document.getElementById('assignTeacherModal').close()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Assign</button>
+                    <button type="button" onclick="document.getElementById('assignTeacherModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/50 transition-all">Assign</button>
                 </div>
             </form>
         </div>

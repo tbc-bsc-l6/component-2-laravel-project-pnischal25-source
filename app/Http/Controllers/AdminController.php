@@ -113,6 +113,20 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Teacher assigned to module.');
     }
 
+    public function unassignTeacherFromModule(Request $request)
+    {
+        $request->validate([
+            'module_id' => 'required|exists:modules,id',
+            'teacher_id' => 'required|exists:users,id',
+        ]);
+
+        TeacherModule::where('user_id', $request->teacher_id)
+            ->where('module_id', $request->module_id)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Teacher unassigned from module.');
+    }
+
     // Student Management
     public function updateUserRole(Request $request, User $user)
     {

@@ -29,6 +29,7 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/modules', [\App\Http\Controllers\AdminController::class, 'storeModule'])->name('modules.store');
     Route::patch('/modules/{module}/toggle', [\App\Http\Controllers\AdminController::class, 'toggleModule'])->name('modules.toggle');
     Route::post('/modules/assign-teacher', [\App\Http\Controllers\AdminController::class, 'assignTeacherToModule'])->name('modules.assignTeacher');
+    Route::delete('/modules/unassign-teacher', [\App\Http\Controllers\AdminController::class, 'unassignTeacherFromModule'])->name('modules.unassignTeacher');
     Route::patch('/users/{user}/role', [\App\Http\Controllers\AdminController::class, 'updateUserRole'])->name('users.updateRole');
     Route::delete('/enrollments/{enrollment}', [\App\Http\Controllers\AdminController::class, 'removeStudentFromModule'])->name('enrollments.destroy');
 });
