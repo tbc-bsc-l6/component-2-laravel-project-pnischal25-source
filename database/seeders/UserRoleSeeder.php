@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserRoleSeeder extends Seeder
 {
@@ -12,11 +13,18 @@ class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin', 'teacher', 'student', 'old_student'];
+        $roles = [
+            'Admin',
+            'Teacher',
+            'Student',
+            'Old Student',
+        ];
+
         foreach ($roles as $role) {
-            \App\Models\UserRole::create([
-                'role' => $role,
-            ]);
+            DB::table('user_roles')->updateOrInsert(
+                ['role' => $role],
+                ['created_at' => now(), 'updated_at' => now()]
+            );
         }
     }
 }
