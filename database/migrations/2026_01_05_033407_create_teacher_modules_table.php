@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('teacher_modules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('module_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            
+            // Prevent duplicate assignments
+            $table->unique(['user_id', 'module_id']);
         });
     }
 

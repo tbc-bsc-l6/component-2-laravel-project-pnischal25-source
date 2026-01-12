@@ -17,6 +17,11 @@ class ModuleSeeder extends Seeder
             'Object Orientated Programming',
             'Developing Mobile Applications',
             'Advanced Web Engineering',
+            'Music',
+            'Arts',
+            'System Development',
+            'ASE',
+            'SPORT'
         ];
         foreach ($modules as $module) {
             \App\Models\Module::create([
