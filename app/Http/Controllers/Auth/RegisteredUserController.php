@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\UserRole;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -35,10 +37,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $studentRole = UserRole::where('role', 'Student')->first();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_role_id' => $studentRole ? $studentRole->id : 3, // Default to 3 (Student) if not found, though handling null is better
         ]);
 
         event(new Registered($user));
