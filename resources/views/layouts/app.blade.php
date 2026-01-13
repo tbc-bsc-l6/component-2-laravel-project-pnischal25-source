@@ -27,15 +27,15 @@
             }
         </style>
     </head>
-    <body class="font-sans antialiased text-slate-900" style="font-family: 'Inter', sans-serif;">
-        <div class="min-h-screen bg-slate-50 relative overflow-hidden">
+    <body class="font-sans antialiased text-slate-900" style="font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #00d084 0%, #00ff99 100%); min-height: 100vh;">
+        <div class="min-h-screen relative overflow-hidden">
             
             <div class="relative z-10">
                 @include('layouts.navigation')
 
                 <!-- Page Heading -->
                 @isset($header)
-                    <header class="bg-white/10 backdrop-blur-md shadow-lg border-b border-white/10">
+                    <header style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);" class="shadow-lg border-b border-white/10">
                         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                             <div class="text-white">
                                 {{ $header }}

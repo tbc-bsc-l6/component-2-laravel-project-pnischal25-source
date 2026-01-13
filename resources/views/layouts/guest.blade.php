@@ -35,18 +35,18 @@
                 animation: gradient-shift 15s ease infinite;
             }
         </style>
-    <body class="font-sans text-slate-900 antialiased bg-white" style="font-family: 'Inter', sans-serif;">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-white relative">
+    <body class="font-sans text-slate-900 antialiased" style="font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #00d084 0%, #00ff99 100%); min-height: 100vh;">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative">
             
             <div class="mb-6">
                 <a href="/">
-                    <x-application-logo class="text-3xl font-bold text-slate-900 tracking-tight" />
+                    <x-application-logo class="text-3xl font-bold text-white tracking-tight drop-shadow-lg" />
                 </a>
             </div>
 
 
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-8 bg-white shadow-none border border-blue-200 rounded-lg overflow-hidden">
+            <div class="w-full sm:max-w-md mt-6 px-6 py-8 bg-white shadow-lg border border-gray-200 rounded-lg overflow-hidden">
                 {{ $slot }}
             </div>
         </div>

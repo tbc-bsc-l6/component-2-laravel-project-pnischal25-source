@@ -24,7 +24,7 @@ class RegisterUser extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => \Illuminate\Support\Facades\Hash::make($this->password),
-            'user_role_id' => \App\Models\UserRole::where('role', 'student')->value('id'),
+            'user_role_id' => \App\Models\UserRole::where('role', 'Student')->value('id'),
         ]);
 
         auth()->login($user);

@@ -37,7 +37,7 @@
                                 <th class="px-6 py-4 font-semibold">Email</th>
                                 <th class="px-6 py-4 font-semibold">Enrolled Date</th>
                                 <th class="px-6 py-4 font-semibold">Status</th>
-                                <th class="px-6 py-4 font-semibold text-right">Grading</th>
+                                <th class="px-6 py-4 font-semibold">Grading</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -55,7 +55,7 @@
                                         <span class="px-2 py-1 rounded text-xs font-semibold bg-red-50 text-red-700 border border-red-200">Failed</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 text-right">
+                                <td class="px-6 py-4">
                                     @if($enrollment->status === 'enrolled')
                                         <form action="{{ route('teacher.enrollments.grade', $enrollment) }}" method="POST" class="inline-block space-x-2">
                                             @csrf

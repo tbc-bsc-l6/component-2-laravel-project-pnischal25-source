@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-slate-800 leading-tight">
-            {{ __('My History') }}
-        </h2>
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h2 class="font-semibold text-2xl text-white leading-tight">
+                {{ __('My History') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-12">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module;
+use Illuminate\Support\Str;
 
 class ModuleController extends Controller
 {
@@ -31,6 +32,7 @@ class ModuleController extends Controller
 
         Module::create([
             'module' => $request->module,
+            'slug' => Str::slug($request->module),
             'is_available' => true,
         ]);
 

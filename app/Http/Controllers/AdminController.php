@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -80,6 +81,7 @@ class AdminController extends Controller
 
         Module::create([
             'module' => $request->module,
+            'slug' => Str::slug($request->module),
             'is_available' => true,
         ]);
 

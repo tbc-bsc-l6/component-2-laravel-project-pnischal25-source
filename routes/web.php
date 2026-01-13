@@ -7,6 +7,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/splash', \App\Livewire\SplashPage::class)->name('splash');
+
 Route::get('/dashboard', function () {
     $user = Auth::user();
     if ($user->userRole->role === 'Admin') return redirect()->route('admin.dashboard');

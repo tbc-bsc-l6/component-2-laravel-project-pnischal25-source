@@ -10,6 +10,7 @@ class Module extends Model
 {
     protected $fillable = [
         'module',
+        'slug',
         'is_available',
     ];
 

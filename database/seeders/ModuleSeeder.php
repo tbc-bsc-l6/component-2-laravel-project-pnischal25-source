@@ -30,7 +30,10 @@ class ModuleSeeder extends Seeder
         foreach ($modules as $moduleData) {
             Module::updateOrCreate(
                 ['module' => $moduleData['module']],
-                ['is_available' => $moduleData['is_available']]
+                [
+                    'slug' => \Illuminate\Support\Str::slug($moduleData['module']),
+                    'is_available' => $moduleData['is_available']
+                ]
             );
         }
 

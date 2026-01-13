@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __('Admin Dashboard') }}
-        </h2>
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                {{ __('Admin Dashboard') }}
+            </h2>
+        </div>
     </x-slot>
 
     <style>
@@ -17,12 +22,12 @@
     </style>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-16">
             
             <!-- Stats Overview -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <!-- Teachers Stats -->
-                <div class="bg-white/80 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                     <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-all duration-300 group-hover:scale-110">
                         <svg class="w-24 h-24 text-purple-600" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
                     </div>
@@ -33,7 +38,7 @@
                 </div>
 
                 <!-- Students Stats -->
-                <div class="bg-white/80 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                     <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-all duration-300 group-hover:scale-110">
                         <svg class="w-24 h-24 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     </div>
@@ -44,7 +49,7 @@
                 </div>
 
                 <!-- Modules Stats -->
-                <div class="bg-white/80 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-white/50 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 relative overflow-hidden group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                     <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-all duration-300 group-hover:scale-110">
                         <svg class="w-24 h-24 text-orange-600" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
                     </div>
@@ -56,7 +61,7 @@
             </div>
 
             <!-- Management Section -->
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 ring-1 ring-black/5" x-data="{ activeTab: 'teachers' }">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200" x-data="{ activeTab: 'teachers' }">
                 <!-- Alert Messages -->
                 @if(session('success'))
                     <div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 m-4" role="alert">
@@ -117,7 +122,7 @@
                                     <tr>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Name</th>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Email</th>
-                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -126,7 +131,7 @@
                                     <tr class="hover:bg-purple-200/70 transition-colors {{ $isEvenRow ? 'bg-purple-100' : 'bg-purple-50' }}">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $teacher->name }}</td>
                                         <td class="px-6 py-4 text-gray-800">{{ $teacher->email }}</td>
-                                        <td class="px-6 py-4 text-right text-gray-800">
+                                        <td class="px-6 py-4 text-gray-800">
                                             <form action="{{ route('admin.users.destroy', $teacher) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
@@ -153,7 +158,7 @@
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Name</th>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Email</th>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Role</th>
-                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-black">
@@ -167,7 +172,7 @@
                                                 {{ $student->userRole->role }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-right text-gray-800">
+                                        <td class="px-6 py-4 text-gray-800">
                                             <form action="{{ route('admin.users.updateRole', $student) }}" method="POST" class="inline-block mr-2">
                                                 @csrf
                                                 @method('PATCH')
@@ -213,7 +218,7 @@
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Status</th>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Teachers</th>
                                         <th class="px-6 py-4 font-bold border-r border-black/10">Enrollments</th>
-                                        <th class="px-6 py-4 font-bold text-right">Actions</th>
+                                        <th class="px-6 py-4 font-bold border-r border-black/10">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -243,18 +248,18 @@
                                             @endforelse
                                         </td>
                                         <td class="px-6 py-4 text-gray-800">{{ $module->enrollments->count() }}/10</td>
-                                        <td class="px-6 py-4 text-right space-x-2 text-gray-800">
+                                        <td class="px-6 py-4 space-x-2 text-gray-800">
                                             <!-- Toggle Availability -->
                                             <form action="{{ route('admin.modules.toggle', $module) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button class="text-sm font-medium underline {{ $module->is_available ? 'text-orange-600 hover:text-orange-800' : 'text-green-600 hover:text-green-800' }}">
+                                                <button class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg text-white" style="background-color: {{ $module->is_available ? '#dc2626' : '#16a34a' }}; color: white;">
                                                     {{ $module->is_available ? 'Archive' : 'Activate' }}
                                                 </button>
                                             </form>
                                             
                                             <!-- Assign Teacher -->
-                                            <button onclick="openAssignTeacherModal({{ $module->id }})" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 hover:text-blue-800 px-3 py-1 rounded-lg font-medium transition-colors">
+                                            <button onclick="openAssignTeacherModal({{ $module->id }})" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300">
                                                 Assign Teacher
                                             </button>
                                         </td>
@@ -274,7 +279,7 @@
 
     <!-- Add Teacher Modal -->
     <dialog id="addTeacherModal" class="modal bg-gray-900/50 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl">
+        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl max-h-[85vh] overflow-y-auto">
             <h3 class="font-bold text-lg mb-4 text-gray-900">Add New Teacher</h3>
             <form method="POST" action="{{ route('admin.teachers.store') }}">
                 @csrf
@@ -298,7 +303,7 @@
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button" onclick="document.getElementById('addTeacherModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
-                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-lg font-semibold shadow-lg shadow-purple-500/50 transition-all">Create</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-black rounded-lg font-semibold shadow-lg shadow-purple-500/50 transition-all">Create</button>
                 </div>
             </form>
         </div>
@@ -306,7 +311,7 @@
 
     <!-- Add Module Modal -->
     <dialog id="addModuleModal" class="modal bg-gray-900/50 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl">
+        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl max-h-[85vh] overflow-y-auto">
             <h3 class="font-bold text-lg mb-4 text-gray-900">Add New Module</h3>
             <form method="POST" action="{{ route('admin.modules.store') }}">
                 @csrf
@@ -318,7 +323,7 @@
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button" onclick="document.getElementById('addModuleModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
-                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white rounded-lg font-semibold shadow-lg shadow-orange-500/50 transition-all">Create</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white rounded-lg font-semibold shadow-lg shadow-orange-500/50 transition-all" style="color: black; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Create</button>
                 </div>
             </form>
         </div>
@@ -326,7 +331,7 @@
 
     <!-- Assign Teacher Modal -->
     <dialog id="assignTeacherModal" class="modal bg-gray-900/50 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl">
+        <div class="bg-white p-6 rounded-xl w-full max-w-md shadow-2xl max-h-[85vh] overflow-y-auto">
             <h3 class="font-bold text-lg mb-4 text-gray-900">Assign Teacher to Module</h3>
             <form method="POST" action="{{ route('admin.modules.assignTeacher') }}">
                 @csrf
@@ -343,7 +348,7 @@
                 </div>
                 <div class="mt-6 flex justify-end space-x-2">
                     <button type="button" onclick="document.getElementById('assignTeacherModal').close()" class="px-5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-colors">Cancel</button>
-                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/50 transition-all">Assign</button>
+                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-black rounded-lg font-semibold shadow-lg shadow-blue-500/50 transition-all">Assign</button>
                 </div>
             </form>
         </div>
